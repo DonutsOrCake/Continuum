@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		471119BA264C7A9700D32547 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471119B9264C7A9700D32547 /* DateFormatter.swift */; };
+		471119BC264C7BE800D32547 /* SearchableRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471119BB264C7BE800D32547 /* SearchableRecord.swift */; };
 		471282CB264B16EB009C2E66 /* PostListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471282CA264B16EB009C2E66 /* PostListTableViewController.swift */; };
 		471282CD264B17A6009C2E66 /* PostDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471282CC264B17A6009C2E66 /* PostDetailTableViewController.swift */; };
 		471282CF264B18B6009C2E66 /* AddPostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471282CE264B18B6009C2E66 /* AddPostTableViewController.swift */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		471119B9264C7A9700D32547 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		471119BB264C7BE800D32547 /* SearchableRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableRecord.swift; sourceTree = "<group>"; };
 		471282CA264B16EB009C2E66 /* PostListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListTableViewController.swift; sourceTree = "<group>"; };
 		471282CC264B17A6009C2E66 /* PostDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailTableViewController.swift; sourceTree = "<group>"; };
 		471282CE264B18B6009C2E66 /* AddPostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPostTableViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				471282D4264B1DFA009C2E66 /* PostError.swift */,
+				471119B9264C7A9700D32547 /* DateFormatter.swift */,
 			);
 			path = "Helper and extension";
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				471282D0264B18DD009C2E66 /* Post.swift */,
+				471119BB264C7BE800D32547 /* SearchableRecord.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -225,6 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				471119BC264C7BE800D32547 /* SearchableRecord.swift in Sources */,
+				471119BA264C7A9700D32547 /* DateFormatter.swift in Sources */,
 				F7F99C392211F96400D13C4C /* AppDelegate.swift in Sources */,
 				471282CB264B16EB009C2E66 /* PostListTableViewController.swift in Sources */,
 				471282CF264B18B6009C2E66 /* AddPostTableViewController.swift in Sources */,

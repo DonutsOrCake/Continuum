@@ -11,6 +11,7 @@ import UIKit
 import CloudKit
 
 class Post {
+    
     var photoData: Data?
     var timestamp: Date
     var caption: String
@@ -25,7 +26,7 @@ class Post {
         }
     }
     
-    init(photo: UIImage?, caption: String, comments: [Comment], timestamp: Date = Date()) {
+    init(photo: UIImage?, caption: String, comments: [Comment] = [], timestamp: Date = Date()) {
         self.caption = caption
         self.comments = comments
         self.timestamp = timestamp
@@ -43,4 +44,11 @@ class Comment {
         self.timestamp = timestamp
         self.post = post
     }
-}
+}//End of class
+
+//MARK: - Extensions
+extension Post: SearchableRecord {
+    func matches(searchTerm: String) -> Bool {
+        caption.lowercased().contains(searchTerm.lowercased())
+    }
+}//End of extension

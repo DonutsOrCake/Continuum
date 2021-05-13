@@ -16,10 +16,13 @@ class PostController {
     
     func addComment(text: String, post: Post, completion: @escaping (Result<Comment, PostError>) -> Void) {
         let newComment = Comment(text: text, post: post)
+        post.comments.append(newComment)
     }
     
     func createPostWith(image: UIImage, caption: String, completion: @escaping (Result<Post?, PostError>) -> Void) {
-//        let newPost = Post(photo: image, caption: caption, comments: [Comment] = [])
+        let newPost = Post(photo: image, caption: caption)
+        posts.append(newPost)
+        
     }
     
     
