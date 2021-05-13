@@ -7,10 +7,12 @@
 //
 
 import Foundation
-extension DateFormatter {
-    static let currentTime: DateFormatter = {
+
+extension Date {
+    func stringWith(dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style) -> String {
         let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        return formatter
-    }()
-}//End of extension
+        formatter.dateStyle = dateStyle
+        formatter.timeStyle = timeStyle
+        return formatter.string(from: self)
+    }
+}

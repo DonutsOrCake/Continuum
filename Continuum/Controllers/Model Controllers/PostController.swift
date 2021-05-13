@@ -11,12 +11,21 @@ import CloudKit
 
 class PostController {
     
+    //MARK: - Properties
     static let shared = PostController()
     var posts: [Post] = []
+    let publicDB = CKContainer.default().publicCloudDatabase
+    private init() {
+        
+    }
     
+    //MARK: - CRUD
     func addComment(text: String, post: Post, completion: @escaping (Result<Comment, PostError>) -> Void) {
-        let newComment = Comment(text: text, post: post)
+        
+        let postReference = CKRecord.Reference(recordID: post.recordID, action: .none)
+        let newComment = Comment(text: text, postReference: postReference)
         post.comments.append(newComment)
+        let record = CKRecord(comment: newComment)
     }
     
     func createPostWith(image: UIImage, caption: String, completion: @escaping (Result<Post?, PostError>) -> Void) {

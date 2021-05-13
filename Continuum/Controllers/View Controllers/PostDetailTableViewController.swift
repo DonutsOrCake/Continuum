@@ -27,6 +27,9 @@ class PostDetailTableViewController: UITableViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let post = post else {return}
+        //BJONES
     }
     
     //MARK: - Actions

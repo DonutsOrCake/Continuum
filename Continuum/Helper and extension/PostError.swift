@@ -10,14 +10,17 @@ import Foundation
 
 enum PostError: LocalizedError {
     case ckError(Error)
-    case couldNotUnwrap
+    case noRecord
+    case noPost
     
     var errorDescription: String? {
         switch self {
         case .ckError(let error):
-            return error.localizedDescription
-        case .couldNotUnwrap:
-            return "Post could not be unwrapped."
+            return "There was an error returned from cloudkit. Error: \(error)"
+        case .noRecord:
+            return "No record was returned from cloudkit"
+        case .noPost:
+            return "The post was not found"
         }
     }
 }

@@ -3,7 +3,6 @@
 //  Continuum
 //
 //  Created by Bryson Jones on 5/11/21.
-//  Copyright © 2021 trevorAdcock. All rights reserved.
 //
 
 import UIKit
@@ -21,8 +20,6 @@ class PostTableViewCell: UITableViewCell {
             updateViews()
         }
     }
-    
-    //MARK: - Actions
     
     //MARK: - Helper funcs
     func updateViews() {

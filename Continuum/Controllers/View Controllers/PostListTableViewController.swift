@@ -12,7 +12,9 @@ class PostListTableViewController: UITableViewController {
     
     //MARK: - Properties
     var isSearching: Bool = false
+    
     var resultsArray: [SearchableRecord] = []
+    
     var dataSource: [SearchableRecord] {
         return isSearching ? resultsArray : PostController.shared.posts
     }
@@ -24,18 +26,19 @@ class PostListTableViewController: UITableViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.reloadData()
         postSearchBar.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-        resultsArray = PostController.shared.posts
+        
+        DispatchQueue.main.async {
+            self.resultsArray = PostController.shared.posts
+            self.tableView.reloadData()
+        }
     }
     
     // MARK: - Table view data source
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -71,17 +74,18 @@ extension PostListTableViewController: UISearchBarDelegate {
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         resultsArray = PostController.shared.posts
-        searchBar.text = nil
+        searchBar.text = ""
         searchBar.resignFirstResponder()
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+        isSearching = false
     }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         isSearching = true
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
         isSearching = false
-        searchBar.text = nil
     }
 }//End of extension
