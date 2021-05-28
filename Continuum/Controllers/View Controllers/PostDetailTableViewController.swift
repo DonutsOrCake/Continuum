@@ -29,7 +29,14 @@ class PostDetailTableViewController: UITableViewController {
         super.viewDidLoad()
         
         guard let post = post else {return}
-        //BJONES
+        PostController.shared.fetchComments(for: post) { (_) in
+            DispatchQueue.main.async {
+                PostController.shared.incrementCommentCount(for: post) { (success) in
+                    print("set comment count")
+                }
+                self.tableView.reloadData()
+            }
+        }
     }
     
     //MARK: - Actions
@@ -52,10 +59,54 @@ class PostDetailTableViewController: UITableViewController {
     }
     
     //MARK: - Functions
-    func updateViews() {
-        guard let post = post else {return}
+    //MARK: - Methods
+    @objc func updateViews() {
+        
+        guard let post = post else { return }
+        
         photoImageView.image = post.photo
         tableView.reloadData()
+        updateFollowPostButtonText()
+    }
+    
+    func updateFollowPostButtonText(){
+        
+        guard let post = post else { return }
+        
+        PostController.shared.checkForSubscription(to: post) { (found) in
+            
+            DispatchQueue.main.async {
+                let postFollowButtonText = found ? "Unfollow Post" : "Follow Post"
+                self.postFollowButton.setTitle(postFollowButtonText, for: .normal)
+            }
+        }
+    }
+    
+    func presentCommentAlertController() {
+        
+        let alertController = UIAlertController(title: "Add a Comment", message: "Be careful. You can't delete your comments...", preferredStyle: .alert)
+        
+        alertController.addTextField { (textField) in
+            textField.placeholder = "Type comment here..."
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let commentAction = UIAlertAction(title: " Add Comment", style: .default) { (_) in
+            
+            guard let commentText = alertController.textFields?.first?.text, !commentText.isEmpty,
+                let post = self.post else { return }
+            
+            PostController.shared.addComment(text: commentText, post: post, completion: { (comment) in
+            })
+            
+            self.tableView.reloadData()
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(commentAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
 
     // MARK: - Table view data source

@@ -12,16 +12,13 @@ class PostListTableViewController: UITableViewController {
     
     //MARK: - Properties
     var isSearching: Bool = false
-    
     var resultsArray: [SearchableRecord] = []
-    
     var dataSource: [SearchableRecord] {
         return isSearching ? resultsArray : PostController.shared.posts
     }
     
     //MARK: - Outlets
     @IBOutlet weak var postSearchBar: UISearchBar!
-    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {

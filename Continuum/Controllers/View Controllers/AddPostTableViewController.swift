@@ -23,13 +23,20 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
     //MARK: - Properties
     var selectedImage: UIImage?
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toPhotoSelectorVC" {
+            let photoSelector = segue.destination as? PhotoSelectorViewController
+            photoSelector?.delegate = self
+        }
+    }
+    
     //MARK: - Actions
     @IBAction func addPostButtonTapped(_ sender: UIButton) {
         
         guard let caption = captionTextField.text, !caption.isEmpty,
               let photo = selectedImage else {return}
         
-        PostController.shared.createPostWith(image: photo, caption: caption) { (post) in }
+        PostController.shared.createPostWith(photo: photo, caption: caption) { (post) in }
         
         self.tabBarController?.selectedIndex = 0
     }
@@ -37,17 +44,6 @@ class AddPostTableViewController: UITableViewController, UIImagePickerController
     @IBAction func cancelBarButtonTapped(_ sender: Any) {
         self.tabBarController?.selectedIndex = 0
     }
-    
-    //MARK: - Functions
-    func presentImagePickerActionSheet() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        //BJONES
-        UIAlertController.Style.actionSheet
-        
-    }
-    
-    
 }//End of class
 
 //MARK: - Extensions
